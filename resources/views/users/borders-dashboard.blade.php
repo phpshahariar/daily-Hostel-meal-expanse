@@ -24,12 +24,9 @@
                                     $sum = 0
                                 @endphp
                                 @foreach(Auth::user()->Border as $key => $data)
-                                    <tr>
-                                        <td>
-                                            {!! $total = $data->breakfast+$data->lunch+$data->dinner !!}
-                                        </td>
-                                    </tr>
-                                    @php($sum = $sum+$total)
+                                    @php
+                                        $sum = ($sum + ($data->breakfast+$data->lunch+$data->dinner))
+                                    @endphp
                                 @endforeach
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $sum }}</div>
                             </div>
@@ -90,7 +87,7 @@
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Border Pay</div>
+                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Border Pay to Hostel</div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
                             </div>
                             <div class="col-auto">
@@ -105,7 +102,7 @@
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Hostel Pay</div>
+                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Hostel Pay to Border</div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">000000</div>
                             </div>
                             <div class="col-auto">
@@ -134,7 +131,7 @@
     </div>
 
 
-{{--    Data Table--}}
+    {{--    Data Table--}}
     <div class="container">
         <h1 class="h3 mb-2 text-gray-800">Data Tables</h1>
         <!-- DataTales Example -->
@@ -179,6 +176,9 @@
             </div>
         </div>
     </div>
+
+
+{{--    Data Table--}}
 
     {{--    Add Daily Meals--}}
     <div class="container">
@@ -225,27 +225,10 @@
             </div>
         </div>
     </div>
-    {{--    End Meal Modal--}}
-{{--    AJAX Crud--}}
-{{--    Insert Data--}}
-{{--    <script type="text/javascript">--}}
-{{--        $('#insert').click(function(){--}}
-{{--            $.ajax({--}}
-{{--                type:'post',--}}
-{{--                url: 'insertdata',--}}
-{{--                data:{--}}
-{{--                    '_token':$('input[name=_token]').val(),--}}
-{{--                    'name':$('input[name=name]').val(),--}}
-{{--                    'date':$('input[name=date]').val(),--}}
-{{--                    'breakfast':$('input[name=breakfast]').val(),--}}
-{{--                    'lunch':$('input[name=lunch]').val(),--}}
-{{--                    'dinner':$('input[name=dinner]').val()--}}
-{{--                },--}}
-{{--                success:function(data){--}}
-{{--                    window.location.reload();--}}
-{{--                },--}}
-{{--            });--}}
-{{--        });--}}
-{{--    </script>--}}
+
+
+    {{--    Add Deposit--}}
+
+    <!-- Modal -->
 
 @endsection

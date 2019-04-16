@@ -17,6 +17,7 @@
 
     <!-- Custom styles for this template-->
     <link href="{!! asset('/assets/') !!}/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="{!! asset('/assets/') !!}/css/css.css" rel="stylesheet">
 
 </head>
 
@@ -26,8 +27,8 @@
 <div id="wrapper">
 
     <!-- Sidebar -->
-    @include('admin.includes.navbar')
-    <!-- End of Sidebar -->
+@include('admin.includes.navbar')
+<!-- End of Sidebar -->
 
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
@@ -36,12 +37,12 @@
         <div id="content">
 
             <!-- Topbar -->
-            @include('admin.includes.header')
-            <!-- End of Topbar -->
+        @include('admin.includes.header')
+        <!-- End of Topbar -->
 
             <!-- Begin Page Content -->
-            @yield('content')
-            <!-- /.container-fluid -->
+        @yield('content')
+        <!-- /.container-fluid -->
 
         </div>
         <!-- End of Main Content -->
@@ -49,6 +50,7 @@
         <!-- Footer -->
         @include('admin.includes.footer')
     </div>
+</div>
 <!-- Bootstrap core JavaScript-->
 <script src="{!! asset('/assets/') !!}/vendor/jquery/jquery.min.js"></script>
 <script src="{!! asset('/assets/') !!}/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
