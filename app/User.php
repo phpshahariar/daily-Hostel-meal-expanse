@@ -41,4 +41,5 @@ class User extends Authenticatable
     public function Border(){
         return $this->hasMany('App\Border');
     }
+
 }

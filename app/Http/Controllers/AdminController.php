@@ -40,7 +40,6 @@ class AdminController extends Controller
         $totalMeal = Border::selectRaw('sum(breakfast) as breakfast,sum(lunch) as lunch, sum(dinner) as dinner, name')->groupBy('name')->get();
 
 
-
         $depositAmount = 0;
         foreach($deposit as $key => $show){
             $depositAmount = ($depositAmount + ($show->balance));

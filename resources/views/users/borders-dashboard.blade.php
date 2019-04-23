@@ -25,10 +25,14 @@
                                 @endphp
                                 @foreach(Auth::user()->Border as $key => $data)
                                     @php
-                                        $sum = ($sum + ($data->breakfast+$data->lunch+$data->dinner))
+                                        $sum = ($sum + ($data->breakfast+$data->lunch+$data->dinner));
                                     @endphp
                                 @endforeach
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $sum }}</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                    @if($sum)
+                                        {{ $sum }}
+                                    @endif
+                                </div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -37,15 +41,51 @@
                     </div>
                 </div>
             </div>
+            @php
+                $totalmeal = 0
+            @endphp
+            @foreach($totalMeal as $key => $Info)
+                @php
+                    $totalmeal = ($totalmeal + ($Info->breakfast+$Info->lunch+$Info->dinner));
 
-            <!-- Earnings (Monthly) Card Example -->
+                @endphp
+            @endforeach
             <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card border-left-success shadow h-100 py-2">
+                <div class="card border-left-warning shadow h-100 py-2">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Deposit Balance</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">000</div>
+                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Meal Rate</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                    @if($totalmeal)
+                                    {{ $totalmeal = number_format($rate/$totalmeal, 2) }}
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-comments fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+                @php
+                $balance = $totalmeal*$sum;
+                @endphp
+
+            @if($depositAmount < $balance)
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-danger shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">You Pay Balance</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                    {{ $deposit = number_format($depositAmount-$balance, 2) }}
+                                    Your Deposit Tk. {{number_format($depositAmount, 2)}}
+                                </div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -54,7 +94,42 @@
                     </div>
                 </div>
             </div>
-
+                @elseif($depositAmount > $balance)
+                <div class="col-xl-3 col-md-6 mb-4">
+                    <div class="card border-left-primary shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Hostel Pay You</div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                        {{ $deposit = number_format($depositAmount-$balance, 2) }}<br/>
+                                    </div>
+                                    <p style="color: #f6993f;">Your Deposit Tk. {{number_format($depositAmount, 2)}}</p>
+                                </div>
+                                <div class="col-auto">
+                                    <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @else($depositAmount = $balance)
+                <div class="col-xl-3 col-md-6 mb-4">
+                    <div class="card border-left-warning shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Deposit & Expanse Equal</div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">Tk.00.00</div>
+                                </div>
+                                <div class="col-auto">
+                                    <i class="fas fa-comments fa-2x text-gray-300"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
             <!-- Earnings (Monthly) Card Example -->
             <div class="col-xl-3 col-md-6 mb-4">
                 <div class="card border-left-info shadow h-100 py-2">
@@ -64,12 +139,7 @@
                                 <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Expanse Balance</div>
                                 <div class="row no-gutters align-items-center">
                                     <div class="col-auto">
-                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">0000</div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="progress progress-sm mr-2">
-                                            <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
+                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{ $expanse = number_format($totalmeal*$sum, 2) }}</div>
                                     </div>
                                 </div>
                             </div>
@@ -80,53 +150,7 @@
                     </div>
                 </div>
             </div>
-
             <!-- Pending Requests Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card border-left-warning shadow h-100 py-2">
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Border Pay to Hostel</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
-                            </div>
-                            <div class="col-auto">
-                                <i class="fas fa-comments fa-2x text-gray-300"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card border-left-warning shadow h-100 py-2">
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Hostel Pay to Border</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">000000</div>
-                            </div>
-                            <div class="col-auto">
-                                <i class="fas fa-comments fa-2x text-gray-300"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card border-left-warning shadow h-100 py-2">
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Meal Rate</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">0000.00</div>
-                            </div>
-                            <div class="col-auto">
-                                <i class="fas fa-comments fa-2x text-gray-300"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 
@@ -154,7 +178,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @php($sum = 0)
+
                         @foreach(Auth::user()->Border as $key => $data)
                             <tr>
                                 <td>{!! $key+1 !!}</td>
@@ -167,7 +191,7 @@
                                     {!! $total = $data->breakfast+$data->lunch+$data->dinner !!}
                                 </td>
                             </tr>
-                            @php($sum = $sum+$total)
+
                         @endforeach
                         </tbody>
                         <div class="alert alert-heading"></div>

@@ -26,7 +26,7 @@
 <div id="wrapper">
 
     <!-- Sidebar -->
-@include('admin.includes.navbar')
+@include('users.includes.navbar')
 <!-- End of Sidebar -->
 
     <!-- Content Wrapper -->

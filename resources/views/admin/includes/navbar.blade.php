@@ -1,10 +1,7 @@
-<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+<ul class="navbar-nav bg-gradient-success sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{!! url('/admin-dashboard') !!}">
-        <div class="sidebar-brand-icon rotate-n-15">
-            <i class="fas fa-laugh-wink"></i>
-        </div>
         <div class="sidebar-brand-text mx-3">Daily Expanse</div>
     </a>
 
@@ -34,17 +31,13 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="{!! url('/border-deposit') !!}">Border Deposit Balance</a>
                 <a class="collapse-item" href="{!! url('/daily/expanse') !!}">Daily Expanse</a>
-                <a class="collapse-item" href="forgot-password.html">Add Border</a>
-                <div class="collapse-divider"></div>
-                <a class="collapse-item" href="404.html">404 Page</a>
-                <a class="collapse-item" href="blank.html">Blank Page</a>
             </div>
         </div>
     </li>
 
     <!-- Nav Item - Tables -->
     <li class="nav-item">
-        <a class="nav-link" href="tables.html">
+        <a class="nav-link" href="#">
             <i class="fas fa-fw fa-table"></i>
             <span>Border Information</span></a>
     </li>
